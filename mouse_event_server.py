@@ -3,12 +3,15 @@ Date : 2022-01-12
 Writer : Yoobi
 
 Patch Note
-[2022-01-09]
-- print Mouse Position
+[2022-01-12]
+- click Mouse Position
+- set mouse Position and click it
 '''
 
+# set modules
 from pynput.mouse import Button, Controller
 
+# this class have serveral mouse controll functions
 class RemoteMouse:
     def __init__(self):
         self.mouse = Controller()
@@ -47,6 +50,7 @@ class RemoteMouse:
             self.mouse.move(to_x, to_y)
         self.mouse.release(Button.left)
 
+# setPos and click it
 if __name__ == '__main__':
     mouse = RemoteMouse()
     print('X: %s, Y:%s' %mouse.getPosition())
