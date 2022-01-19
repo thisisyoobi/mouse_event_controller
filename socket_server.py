@@ -4,11 +4,10 @@ Writer : Yoobi
 
 Patch Note
 [2022-01-14]
-- server threaded setting
+- server threaded socket receiver
 '''
 
 import socket
-import pymysql
 import sys
 from _thread import *
 from urllib import parse
@@ -24,48 +23,11 @@ def threaded(client_socket, addr):
         try:
             # 데이터 수신
             data = client_socket.recv(1024)
+            print(data.decode())
 
             if not data:
                 print('Disconnected by ' + addr[0], ':', addr[1])
                 break
-
-            # DB 연결
-            connect = pymysql.connect(host='localhost', user='ksj', password='qhdks!321', db='WebProject', charset='utf8')
-            cur = connect.cursor()
-
-            # 수신된 데이터 분리
-            user_data = data.decode()
-            user_data = str(user_data).split(" ")
-            user_data[1] = user_data[0] + " " + user_data[1]
-            del user_data[0]
-            print(user_data)
-
-            # 공인IP와 사용자 이름 매칭
-            f = open('/var/log/apache2/other_vhosts_access.log' , 'r')
-
-            check_break = True
-
-            for line in f.readlines()[::-1]:
-                if "?name=" in line:
-                    list_line = line.split()
-                    if list_line[1] == user_data[1]:
-                        # print(line)
-                        for find_name in list_line:
-                            if "?name=" in find_name:
-                                find_name = find_name.split("name=")[1].replace('"','')
-                                find_name = parse.unquote(find_name)
-                                check_break = False
-                                break
-                        if(check_break == False):
-                            break
-                    else:
-                        find_name = "No Name"
-
-            # DB의 infected_user_info table에 저장
-            query = "insert into infected_user_info values ('" + user_data[0] + "', '" + find_name + "', '" + user_data[1] + "', '" + user_data[2] + "', '" + user_data[3] + "')"
-            cur.execute(query)
-            connect.commit()
-
 
         except ConnectionResetError as e:
 
