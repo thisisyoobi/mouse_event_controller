@@ -60,12 +60,13 @@ class RemoteMouse:
 # setPos and click it
 def mouse_controller(x, y):
     mouse = RemoteMouse()
-    print('X: %s, Y:%s' %mouse.getPosition())
+    print('Before Pos X: %s, Y:%s' %mouse.getPosition())
     
     mouse.setPos(500, 500)
+    # mouse.setPos(x, y)
     mouse.click()
 
-    print('X: %s, Y:%s' %mouse.getPosition())
+    print('After X: %s, Y:%s' %mouse.getPosition())
     return
 
 # 쓰레드에서 실행되는 코드
