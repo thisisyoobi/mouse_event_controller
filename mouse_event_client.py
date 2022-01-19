@@ -5,6 +5,7 @@ Writer : Yoobi
 Patch Note
 [2022-01-09]
 - print Mouse Position
+- set mouse listener <- very important
 '''
 
 # set modules
@@ -22,7 +23,7 @@ def on_click(x, y, button, pressed):
 def on_scroll(x, y, dx, dy):
     print('Scroll: (%s, %s) (%s, %s).' %(x, y, dx, dy))
 
-# holding listen mode and when an evnet occurs as listener
+# holding listen mode and when an event occurs as listener
 with mouse.Listener(
     on_move=on_move,
     on_click=on_click,
