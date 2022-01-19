@@ -5,8 +5,10 @@ Writer : Yoobi
 Patch Note
 [2022-01-14]
 - server threaded socket receiver
+- receiving data and print it
 '''
 
+# set modules
 import socket
 import sys
 from _thread import *
