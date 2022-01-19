@@ -31,6 +31,8 @@ def on_click(x, y, button, pressed):
     print('Button: %s, Position: (%s, %s), Pressed: %s ' %(button, x, y, pressed))
     if str(button) == "Button.left" and str(pressed) == "True":
         socket_sender(x, y)
+    if str(pressed) == "False":
+        print("ffff")
 
 # printing scrolling mouse info
 def on_scroll(x, y, dx, dy):
@@ -79,6 +81,7 @@ def socket_sender(x, y):
 ### socket sending data part end ###
 ####################################
 
+# main
 if __name__ == '__main__':
     print("a")
     mouse_listener()
